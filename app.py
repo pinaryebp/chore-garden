@@ -336,6 +336,7 @@ div[data-testid="stToolbar"] { display: none !important; }
 
 /* Select box dropdown text */
 .stSelectbox > div > div {
+    background-color: white !important;
     border-radius: 12px !important; border-color: #E8E0D0 !important;
     font-family: 'Nunito', sans-serif !important; color: #3D3530 !important;
 }
@@ -344,6 +345,7 @@ div[data-testid="stToolbar"] { display: none !important; }
 
 /* Text input field text */
 .stTextInput > div > div > input {
+    background-color: white !important;
     border-radius: 12px !important; border-color: #E8E0D0 !important;
     font-family: 'Nunito', sans-serif !important; font-weight: 600 !important;
     color: #3D3530 !important;
@@ -369,6 +371,7 @@ div[data-testid="stToolbar"] { display: none !important; }
 /* Expander */
 div[data-testid="stExpander"] { border-radius: 14px !important; border-color: #E8E0D0 !important; }
 div[data-testid="stExpander"] summary {
+    background-color: white !important;
     color: #3D3530 !important;
     font-family: 'Nunito', sans-serif !important;
     font-weight: 700 !important;
