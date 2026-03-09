@@ -836,31 +836,32 @@ with tab_garden:
     if wlog:
         st.markdown('<div class="sec-title">Recent activity</div>', unsafe_allow_html=True)
         with st.expander("Show details"):
-            for entry in reversed(wlog):
+         for entry in reversed(wlog):
                 pcls = "pinar" if entry["player"] == "Pınar" else "cris"
                 dt = datetime.fromisoformat(entry["date"])
                 dt_str = dt.strftime("%a, %b %d · %I:%M %p")
                 bloom = BLOOM_MAP.get(min(entry["points"], 5), "🌱")
                 pcolor = "#D4764E" if pcls == "pinar" else "#5B8C5A"
-                st.markdown(
-                    f'<div class="g-history {pcls}">'
-                    f'<strong>{entry["choreEmoji"]} {entry["choreName"]}</strong>'
-                    f'<span style="float:right;color:{pcolor} !important;font-weight:800">{bloom} +{entry["points"]}</span><br>'
-                    f'<span style="color:{pcolor} !important;font-weight:700">{entry["player"]}</span> · '
-                    f'<span style="color:#6B7B5A !important;font-size:12px">{dt_str}</span></div>',
-                    unsafe_allow_html=True,
-                )
-            st.markdown("---")
-            del_opts = {
-                f'{e["choreEmoji"]} {e["choreName"]} — {e["player"]} ({datetime.fromisoformat(e["date"]).strftime("%b %d %I:%M%p")})': e["id"]
-                for e in reversed(wlog)
-            }
-            to_del = st.selectbox("Remove an entry:", ["(select)"] + list(del_opts.keys()), key="del_sel")
-            if to_del != "(select)":
-                if st.button("🗑️ Remove", key="do_del"):
-                    data["log"] = [e for e in data["log"] if e["id"] != del_opts[to_del]]
-                    save_data(data)
-                    st.rerun()
+                
+                # Split the space into two columns: one large for the text, one small for the button
+                col1, col2 = st.columns([5, 1])
+                
+                with col1:
+                    st.markdown(
+                        f'<div class="g-history {pcls}">'
+                        f'<strong>{entry["choreEmoji"]} {entry["choreName"]}</strong>'
+                        f'<span style="float:right;color:{pcolor} !important;font-weight:800">{bloom} +{entry["points"]}</span><br>'
+                        f'<span style="color:{pcolor} !important;font-weight:700">{entry["player"]}</span> · '
+                        f'<span style="color:#6B7B5A !important;font-size:12px">{dt_str}</span></div>',
+                        unsafe_allow_html=True,
+                    )
+                with col2:
+                    # Add a little invisible margin so the button drops down and centers nicely
+                    st.markdown("<div style='margin-top: 12px;'></div>", unsafe_allow_html=True)
+                    if st.button("🗑️", key=f"del_{entry['id']}", help="Delete this log"):
+                        data["log"] = [e for e in data["log"] if e["id"] != entry["id"]]
+                        save_data(data)
+                        st.rerun()
 
 
 # ======================== CHARTS TAB ========================
