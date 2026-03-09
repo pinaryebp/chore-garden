@@ -67,6 +67,35 @@ st.markdown("""
 #MainMenu, footer, header[data-testid="stHeader"] { display: none !important; }
 div[data-testid="stToolbar"] { display: none !important; }
 
+/*
+ * ─── MASTER TEXT COLOR FIX ───
+ * Force all Streamlit text elements to use dark readable colors
+ */
+.stApp, .stApp p, .stApp span, .stApp div, .stApp label {
+    color: #3D3530 !important;
+}
+/* Re-apply specific colors where needed (these override the master rule) */
+.garden-header h1 { color: #2C4A2B !important; }
+.garden-header p { color: #3D6B3A !important; }
+.mini-garden .m-name.pinar { color: #D4764E !important; }
+.mini-garden .m-name.cris { color: #5B8C5A !important; }
+.mini-garden .m-pts.pinar { color: #D4764E !important; }
+.mini-garden .m-pts.cris { color: #5B8C5A !important; }
+.mini-garden .m-label { color: #7A8B6A !important; }
+.sec-title { color: #3D3530 !important; }
+.todo-name { color: #3D3530 !important; }
+.todo-name.done { color: #A0A090 !important; }
+.todo-meta { color: #6B7B5A !important; }
+.empty-state { color: #6B7B5A !important; }
+.g-week { color: #6B7B5A !important; }
+.g-stat .s-label { color: #6B7B5A !important; }
+.g-stat .s-num { color: #3D3530 !important; }
+.g-stat .s-num.pinar { color: #D4764E !important; }
+.g-stat .s-num.cris { color: #5B8C5A !important; }
+.bloom-banner.tie { color: #6B7B5A !important; }
+.bloom-banner.pinar { color: #D4764E !important; }
+.bloom-banner.cris { color: #5B8C5A !important; }
+
 /* ── Scrollbar ── */
 ::-webkit-scrollbar { width: 4px; }
 ::-webkit-scrollbar-thumb { background: #C2D6B4; border-radius: 4px; }
@@ -85,13 +114,13 @@ div[data-testid="stToolbar"] { display: none !important; }
 }
 .garden-header h1 {
     font-family: 'Playfair Display', serif !important;
-    font-size: 30px !important; color: #2C4A2B !important;
+    font-size: 30px !important;
     margin: 0 !important; padding: 0 !important;
     text-shadow: 0 1px 3px rgba(255,255,255,0.4);
     line-height: 1.2 !important;
 }
 .garden-header p {
-    color: #3D6B3A; font-size: 13px; font-weight: 700;
+    font-size: 13px; font-weight: 700;
     margin: 4px 0 0 0 !important; font-family: 'Nunito', sans-serif;
 }
 
@@ -104,12 +133,8 @@ div[data-testid="stToolbar"] { display: none !important; }
 .mini-garden.cris { background: #EEF5EE; border: 2px solid #5B8C5A25; }
 .mini-garden .m-icon { font-size: 20px; }
 .mini-garden .m-name { font-weight: 800; font-size: 13px; font-family: 'Nunito', sans-serif; }
-.mini-garden .m-name.pinar { color: #D4764E; }
-.mini-garden .m-name.cris { color: #5B8C5A; }
 .mini-garden .m-pts { font-weight: 900; font-size: 34px; line-height: 1.1; font-family: 'Nunito', sans-serif; }
-.mini-garden .m-pts.pinar { color: #D4764E; }
-.mini-garden .m-pts.cris { color: #5B8C5A; }
-.mini-garden .m-label { font-size: 10px; color: #8B9B7A; font-weight: 600; font-family: 'Nunito', sans-serif; }
+.mini-garden .m-label { font-size: 10px; font-weight: 600; font-family: 'Nunito', sans-serif; }
 
 /* ── Garden Viz ── */
 .garden-viz {
@@ -123,7 +148,7 @@ div[data-testid="stToolbar"] { display: none !important; }
 /* ── Section Titles ── */
 .sec-title {
     font-family: 'Nunito', sans-serif; font-weight: 800;
-    font-size: 17px; color: #4A4238; margin: 18px 0 10px; padding: 0;
+    font-size: 17px; margin: 18px 0 10px; padding: 0;
 }
 
 /* ── Todo Items ── */
@@ -144,19 +169,19 @@ div[data-testid="stToolbar"] { display: none !important; }
 }
 .todo-checkbox.checked {
     background: #5B8C5A; border-color: #5B8C5A;
-    color: white; display: flex; align-items: center;
+    color: white !important; display: flex; align-items: center;
     justify-content: center; font-weight: 800; font-size: 14px;
 }
 .todo-info { flex: 1; min-width: 0; }
-.todo-name { font-weight: 700; font-size: 15px; color: #4A4238; }
-.todo-name.done { text-decoration: line-through; color: #A0A090; }
-.todo-meta { font-size: 11px; color: #8B9B7A; font-weight: 600; margin-top: 2px; }
+.todo-name { font-weight: 700; font-size: 15px; }
+.todo-name.done { text-decoration: line-through; }
+.todo-meta { font-size: 11px; font-weight: 600; margin-top: 2px; }
 
 /* ── Quick Log Buttons ── */
 .quick-btns { display: flex; gap: 6px; flex-shrink: 0; }
 .quick-btn {
     width: 36px; height: 36px; border-radius: 11px; border: none;
-    color: white; font-size: 16px; display: flex;
+    color: white !important; font-size: 16px; display: flex;
     align-items: center; justify-content: center;
     cursor: pointer; box-shadow: 0 3px 10px rgba(0,0,0,0.1);
     transition: transform 0.15s;
@@ -165,38 +190,24 @@ div[data-testid="stToolbar"] { display: none !important; }
 .quick-btn.pinar { background: #D4764E; }
 .quick-btn.cris { background: #5B8C5A; }
 
-/* ── Big Score Cards ── */
-.garden-score {
-    border-radius: 22px; padding: 22px 16px; text-align: center;
-    color: white; box-shadow: 0 8px 30px rgba(0,0,0,0.12);
-    position: relative;
-}
-.garden-score.pinar { background: linear-gradient(135deg, #D4764E, #E8A87C); }
-.garden-score.cris { background: linear-gradient(135deg, #5B8C5A, #8BBF88); }
-.garden-score.winner { transform: scale(1.03); }
-.gs-crown { font-size: 28px; margin-bottom: -4px; }
-.gs-icon { font-size: 34px; }
-.gs-name { font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 18px; }
-.gs-pts { font-family: 'Playfair Display', serif; font-size: 50px; line-height: 1.1; text-shadow: 0 2px 10px rgba(0,0,0,0.15); }
-.gs-sub { font-size: 12px; opacity: 0.85; font-weight: 600; font-family: 'Nunito', sans-serif; }
-
 /* ── Banners ── */
 .bloom-banner {
     text-align: center; padding: 14px 20px; border-radius: 18px;
     font-size: 15px; font-weight: 700; font-family: 'Nunito', sans-serif;
     margin-top: 14px;
 }
-.bloom-banner.pinar { background: #FDF2EC; border: 2px solid #D4764E; color: #D4764E; }
-.bloom-banner.cris { background: #EEF5EE; border: 2px solid #5B8C5A; color: #5B8C5A; }
-.bloom-banner.tie { background: #F5F0E3; border: 2px solid #D4DBC8; color: #8B9B7A; }
+.bloom-banner.pinar { background: #FDF2EC; border: 2px solid #D4764E; }
+.bloom-banner.cris { background: #EEF5EE; border: 2px solid #5B8C5A; }
+.bloom-banner.tie { background: #F5F0E3; border: 2px solid #D4DBC8; }
 
 /* ── Toast ── */
 .g-toast {
-    padding: 14px 24px; border-radius: 50px; color: white; font-weight: 700;
+    padding: 14px 24px; border-radius: 50px; color: white !important; font-weight: 700;
     font-size: 14px; text-align: center; margin-bottom: 16px;
     font-family: 'Nunito', sans-serif; box-shadow: 0 6px 25px rgba(0,0,0,0.15);
     animation: toastSlide 0.4s ease;
 }
+.g-toast span, .g-toast div { color: white !important; }
 @keyframes toastSlide {
     from { opacity: 0; transform: translateY(-10px); }
     to { opacity: 1; transform: translateY(0); }
@@ -206,7 +217,7 @@ div[data-testid="stToolbar"] { display: none !important; }
 
 /* ── Week Label ── */
 .g-week {
-    text-align: center; font-size: 14px; color: #8B9B7A; font-weight: 700;
+    text-align: center; font-size: 14px; font-weight: 700;
     background: #F0EDE2; padding: 10px 18px; border-radius: 14px;
     font-family: 'Nunito', sans-serif; margin-bottom: 16px;
 }
@@ -228,10 +239,8 @@ div[data-testid="stToolbar"] { display: none !important; }
 }
 .g-stat.pinar-top { border-top: 3px solid #D4764E; }
 .g-stat.cris-top { border-top: 3px solid #5B8C5A; }
-.g-stat .s-num { font-family: 'Playfair Display', serif; font-size: 30px; color: #4A4238; }
-.g-stat .s-num.pinar { color: #D4764E; }
-.g-stat .s-num.cris { color: #5B8C5A; }
-.g-stat .s-label { font-size: 12px; color: #8B9B7A; font-weight: 600; font-family: 'Nunito', sans-serif; margin-top: 4px; }
+.g-stat .s-num { font-family: 'Playfair Display', serif; font-size: 30px; }
+.g-stat .s-label { font-size: 12px; font-weight: 600; font-family: 'Nunito', sans-serif; margin-top: 4px; }
 
 /* ── Chart Container ── */
 .chart-box {
@@ -248,31 +257,20 @@ div[data-testid="stToolbar"] { display: none !important; }
     box-shadow: 0 1px 6px rgba(0,0,0,0.03);
 }
 .chore-row .cr-emoji { font-size: 22px; }
-.chore-row .cr-name { flex: 1; font-weight: 700; font-size: 14px; color: #4A4238; }
-.chore-row .cr-meta { font-size: 12px; color: #8B9B7A; font-weight: 700; }
+.chore-row .cr-name { flex: 1; font-weight: 700; font-size: 14px; }
+.chore-row .cr-meta { font-size: 12px; font-weight: 700; }
 .freq-tag {
-    display: inline-block; background: #EEF5EE; color: #5B8C5A;
+    display: inline-block; background: #EEF5EE; color: #5B8C5A !important;
     border-radius: 8px; padding: 2px 8px; font-size: 10px; font-weight: 700;
     margin-left: 4px; font-family: 'Nunito', sans-serif;
 }
 
 /* ── Empty State ── */
 .empty-state {
-    text-align: center; padding: 30px 20px; color: #8B9B7A;
+    text-align: center; padding: 30px 20px;
     font-size: 15px; font-weight: 600; background: white;
     border-radius: 18px; border: 2px solid #E8E0D0;
     font-family: 'Nunito', sans-serif;
-}
-
-/* ── Add Chore Form ── */
-.add-form-box {
-    background: white; border-radius: 20px; padding: 20px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
-    border: 2px solid #E8E0D0; margin-top: 16px;
-}
-.add-form-title {
-    font-weight: 800; font-size: 17px; color: #5B8C5A;
-    margin-bottom: 14px; font-family: 'Nunito', sans-serif;
 }
 
 /* ── Danger Zone ── */
@@ -280,13 +278,17 @@ div[data-testid="stToolbar"] { display: none !important; }
     background: #FFF5F5; border-radius: 16px; padding: 20px;
     border: 2px solid #FFDDDD; margin-top: 28px;
 }
-.danger-title { font-weight: 800; font-size: 14px; color: #CC4444; margin-bottom: 10px; font-family: 'Nunito', sans-serif; }
+.danger-title { font-weight: 800; font-size: 14px; color: #CC4444 !important; margin-bottom: 10px; font-family: 'Nunito', sans-serif; }
 
-/* ── Streamlit Element Overrides ── */
+/* ──────────────────────────────────────────────────────────
+ * STREAMLIT ELEMENT OVERRIDES — ALL DARK TEXT
+ * ────────────────────────────────────────────────────────── */
+
+/* Buttons */
 .stButton > button {
     font-family: 'Nunito', sans-serif !important; font-weight: 700 !important;
     border-radius: 14px !important; border: 2px solid #E8E0D0 !important;
-    background: white !important; color: #4A4238 !important;
+    background: white !important; color: #3D3530 !important;
     transition: all 0.2s !important; padding: 0.4rem 1rem !important;
 }
 .stButton > button:hover {
@@ -294,16 +296,9 @@ div[data-testid="stToolbar"] { display: none !important; }
     background: #EEF5EE !important; transform: translateY(-1px) !important;
     box-shadow: 0 4px 12px rgba(91,140,90,0.15) !important;
 }
-.stButton > button:active {
-    transform: translateY(0) !important;
-}
-
-/* Player pick buttons */
-.player-pick > div > .stButton > button {
-    padding: 1.2rem 1rem !important; font-size: 18px !important;
-    font-weight: 800 !important; border-radius: 20px !important;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.08) !important;
-}
+.stButton > button:active { transform: translateY(0) !important; }
+.stButton > button p { color: #3D3530 !important; }
+.stButton > button:hover p { color: #5B8C5A !important; }
 
 /* Tabs */
 .stTabs [data-baseweb="tab-list"] {
@@ -312,30 +307,112 @@ div[data-testid="stToolbar"] { display: none !important; }
 }
 .stTabs [data-baseweb="tab"] {
     font-family: 'Nunito', sans-serif !important; font-weight: 700 !important;
-    border-radius: 12px !important; color: #8B9B7A !important;
+    border-radius: 12px !important; color: #6B6560 !important;
     font-size: 14px !important; padding: 10px 8px !important;
 }
+.stTabs [data-baseweb="tab"] p { color: #6B6560 !important; }
 .stTabs [aria-selected="true"] {
     background: white !important; color: #5B8C5A !important;
     box-shadow: 0 2px 10px rgba(0,0,0,0.06) !important;
 }
+.stTabs [aria-selected="true"] p { color: #5B8C5A !important; }
 .stTabs [data-baseweb="tab-highlight"], .stTabs [data-baseweb="tab-border"] { display: none !important; }
 
-/* Select boxes */
-.stSelectbox > div > div { border-radius: 12px !important; border-color: #E8E0D0 !important; font-family: 'Nunito', sans-serif !important; }
-.stTextInput > div > div > input { border-radius: 12px !important; border-color: #E8E0D0 !important; font-family: 'Nunito', sans-serif !important; font-weight: 600 !important; }
+/* ALL form labels — selectbox, text input, slider, radio, etc. */
+.stSelectbox label, .stSelectbox label p,
+.stTextInput label, .stTextInput label p,
+.stSlider label, .stSlider label p,
+.stRadio label, .stRadio label p,
+.stNumberInput label, .stNumberInput label p,
+.stTextArea label, .stTextArea label p,
+.stCheckbox label, .stCheckbox label p,
+.stMultiSelect label, .stMultiSelect label p,
+.stDateInput label, .stDateInput label p,
+.stTimeInput label, .stTimeInput label p {
+    color: #3D3530 !important;
+    font-family: 'Nunito', sans-serif !important;
+    font-weight: 700 !important;
+}
+
+/* Select box dropdown text */
+.stSelectbox > div > div {
+    border-radius: 12px !important; border-color: #E8E0D0 !important;
+    font-family: 'Nunito', sans-serif !important; color: #3D3530 !important;
+}
+.stSelectbox [data-baseweb="select"] span { color: #3D3530 !important; }
+.stSelectbox [data-baseweb="select"] div { color: #3D3530 !important; }
+
+/* Text input field text */
+.stTextInput > div > div > input {
+    border-radius: 12px !important; border-color: #E8E0D0 !important;
+    font-family: 'Nunito', sans-serif !important; font-weight: 600 !important;
+    color: #3D3530 !important;
+}
+.stTextInput > div > div > input::placeholder { color: #A09890 !important; }
+
+/* Slider text and values */
 .stSlider > div { font-family: 'Nunito', sans-serif !important; }
+.stSlider [data-testid="stTickBarMin"],
+.stSlider [data-testid="stTickBarMax"],
+.stSlider div[data-testid="stThumbValue"] {
+    color: #3D3530 !important;
+}
+.stSlider [data-baseweb="slider"] div { color: #3D3530 !important; }
+
+/* Radio button text */
+.stRadio > div { font-family: 'Nunito', sans-serif !important; }
+.stRadio label { font-weight: 700 !important; color: #3D3530 !important; }
+.stRadio label p { color: #3D3530 !important; }
+.stRadio div[role="radiogroup"] label p { color: #3D3530 !important; }
+.stRadio div[role="radiogroup"] label span { color: #3D3530 !important; }
 
 /* Expander */
-.streamlit-expanderHeader { font-family: 'Nunito', sans-serif !important; font-weight: 700 !important; color: #4A4238 !important; border-radius: 14px !important; }
 div[data-testid="stExpander"] { border-radius: 14px !important; border-color: #E8E0D0 !important; }
+div[data-testid="stExpander"] summary {
+    color: #3D3530 !important;
+    font-family: 'Nunito', sans-serif !important;
+    font-weight: 700 !important;
+}
+div[data-testid="stExpander"] summary p { color: #3D3530 !important; }
+div[data-testid="stExpander"] summary span { color: #3D3530 !important; }
+div[data-testid="stExpander"] details summary { color: #3D3530 !important; }
+.streamlit-expanderHeader {
+    font-family: 'Nunito', sans-serif !important;
+    font-weight: 700 !important;
+    color: #3D3530 !important;
+    border-radius: 14px !important;
+}
+/* Content inside expanders */
+div[data-testid="stExpander"] div[data-testid="stExpanderDetails"] p { color: #3D3530 !important; }
 
-/* Radio (chart toggle) */
-.stRadio > div { font-family: 'Nunito', sans-serif !important; }
-.stRadio label { font-weight: 700 !important; color: #8B9B7A !important; }
+/* Captions — slightly muted but still readable */
+.stCaption, [data-testid="stCaptionContainer"],
+.stCaption p, [data-testid="stCaptionContainer"] p {
+    font-family: 'Nunito', sans-serif !important;
+    color: #6B7B5A !important;
+}
 
-/* Captions */
-.stCaption, [data-testid="stCaptionContainer"] { font-family: 'Nunito', sans-serif !important; color: #8B9B7A !important; }
+/* Warning box text */
+div[data-testid="stNotification"] p { color: #3D3530 !important; }
+
+/* Markdown paragraph text */
+.stMarkdown p { color: #3D3530 !important; }
+
+/* Metric labels */
+div[data-testid="stMetricLabel"] p { color: #3D3530 !important; }
+div[data-testid="stMetricValue"] { color: #3D3530 !important; }
+
+/* Horizontal divider */
+hr { border-color: #E8E0D0 !important; }
+
+/* Selectbox dropdown menu items */
+[data-baseweb="menu"] li { color: #3D3530 !important; }
+[data-baseweb="menu"] [role="option"] { color: #3D3530 !important; }
+
+/* White text areas — score cards, toast must stay white */
+.garden-score, .garden-score div, .garden-score span,
+.g-toast, .g-toast div, .g-toast span,
+.todo-checkbox.checked { color: white !important; }
 </style>
 """, unsafe_allow_html=True)
 
@@ -650,7 +727,7 @@ with tab_log:
         player = next(p for p in PLAYERS if p["name"] == pname)
 
         st.markdown(
-            f'<div class="sec-title" style="color:{player["color"]}">'
+            f'<div class="sec-title" style="color:{player["color"]} !important">'
             f'{player["icon"]} What did {player["name"]} do?</div>',
             unsafe_allow_html=True,
         )
@@ -669,9 +746,9 @@ with tab_log:
                             padding:14px 10px;text-align:center;margin-bottom:4px;
                             box-shadow:0 2px 8px rgba(0,0,0,0.03);">
                             <div style="font-size:28px">{ch['emoji']}</div>
-                            <div style="font-weight:700;font-size:13px;color:#4A4238;
+                            <div style="font-weight:700;font-size:13px;color:#3D3530 !important;
                                 font-family:'Nunito',sans-serif;line-height:1.2">{ch['name']}</div>
-                            <div style="display:inline-block;background:{player['light']};color:{player['color']};
+                            <div style="display:inline-block;background:{player['light']};color:{player['color']} !important;
                                 border-radius:20px;padding:3px 12px;font-weight:800;font-size:12px;
                                 margin-top:4px;font-family:'Nunito',sans-serif">{bloom} +{ch['points']}</div>
                         </div>
@@ -713,23 +790,30 @@ with tab_garden:
         "pinar": "linear-gradient(135deg, #D4764E, #E8A87C)",
         "cris": "linear-gradient(135deg, #5B8C5A, #8BBF88)",
     }
-    c1, c2 = st.columns(2)
-    for i, p in enumerate(PLAYERS):
+    cards_html = ""
+    for p in PLAYERS:
         is_top = top == p["name"]
-        crown = "<div style='font-size:28px;margin-bottom:-4px;'>👑</div>" if is_top else ""
+        crown = "<div style='font-size:28px;margin-bottom:-4px;'>&#x1F451;</div>" if is_top else ""
         scale = "transform:scale(1.03);" if is_top else ""
-        with [c1, c2][i]:
-            st.markdown(f"""
-            <div style="border-radius:22px;padding:22px 16px;text-align:center;color:white;
-                background:{BG_GRAD[p['cls']]};box-shadow:0 8px 30px rgba(0,0,0,0.12);
-                position:relative;{scale}">
-                {crown}
-                <div style="font-size:34px;">{p['icon']}</div>
-                <div style="font-family:'Nunito',sans-serif;font-weight:800;font-size:18px;">{p['name']}</div>
-                <div style="font-family:'Playfair Display',serif;font-size:50px;line-height:1.1;text-shadow:0 2px 10px rgba(0,0,0,0.15);">{scores[p['name']]['total']}</div>
-                <div style="font-size:12px;opacity:0.85;font-weight:600;font-family:'Nunito',sans-serif;">{scores[p['name']]['count']} chores planted</div>
-            </div>
-            """, unsafe_allow_html=True)
+        bg = BG_GRAD[p['cls']]
+        pts = scores[p['name']]['total']
+        cnt = scores[p['name']]['count']
+        cards_html += (
+            f'<div style="flex:1;border-radius:22px;padding:22px 16px;text-align:center;'
+            f'color:white !important;background:{bg};box-shadow:0 8px 30px rgba(0,0,0,0.12);'
+            f'position:relative;{scale}">'
+            f'{crown}'
+            f'<div style="font-size:34px;">{p["icon"]}</div>'
+            f'<div style="font-family:Nunito,sans-serif;font-weight:800;font-size:18px;color:white !important;">{p["name"]}</div>'
+            f'<div style="font-family:Playfair Display,serif;font-size:50px;line-height:1.1;'
+            f'text-shadow:0 2px 10px rgba(0,0,0,0.15);color:white !important;">{pts}</div>'
+            f'<div style="font-size:12px;opacity:0.9;font-weight:600;color:white !important;">{cnt} chores planted</div>'
+            f'</div>'
+        )
+    st.markdown(
+        f'<div style="display:flex;gap:12px;margin-bottom:14px;">{cards_html}</div>',
+        unsafe_allow_html=True,
+    )
 
     if top:
         tcls = "pinar" if top == "Pınar" else "cris"
@@ -758,9 +842,9 @@ with tab_garden:
                 st.markdown(
                     f'<div class="g-history {pcls}">'
                     f'<strong>{entry["choreEmoji"]} {entry["choreName"]}</strong>'
-                    f'<span style="float:right;color:{pcolor};font-weight:800">{bloom} +{entry["points"]}</span><br>'
-                    f'<span style="color:{pcolor};font-weight:700">{entry["player"]}</span> · '
-                    f'<span style="color:#8B9B7A;font-size:12px">{dt_str}</span></div>',
+                    f'<span style="float:right;color:{pcolor} !important;font-weight:800">{bloom} +{entry["points"]}</span><br>'
+                    f'<span style="color:{pcolor} !important;font-weight:700">{entry["player"]}</span> · '
+                    f'<span style="color:#6B7B5A !important;font-size:12px">{dt_str}</span></div>',
                     unsafe_allow_html=True,
                 )
             st.markdown("---")
@@ -850,9 +934,6 @@ with tab_chores:
     for ch in data["chores"]:
         bloom = BLOOM_MAP.get(min(ch["points"], 5), "🌱")
         freq_label = FREQ_MAP.get(ch.get("freq", "none"), {}).get("label", "No repeat")
-        freq_tag = ""
-        if ch.get("freq") and ch["freq"] != "none":
-            freq_tag = f' <span class="freq-tag">{freq_label}</span>'
 
         with st.expander(f'{ch["emoji"]} {ch["name"]}  —  {bloom} {ch["points"]} seeds'):
             new_name = st.text_input("Name", ch["name"], key=f"en_{ch['id']}")
