@@ -618,7 +618,7 @@ with tab_todo:
                 st.session_state.just_logged = {"player": "Cris", "chore": ch["name"], "emoji": ch["emoji"], "points": ch["points"]}
                 st.rerun()
 
-    # ── Done chores ──
+# ── Done chores ──
     if done:
         st.markdown('<div class="sec-title">✅ Done</div>', unsafe_allow_html=True)
         for ch in done:
@@ -627,24 +627,34 @@ with tab_todo:
             reset = time_until_reset(ch, data.get("todo", {}))
             reset_text = f" · resets in {reset}" if reset else ""
 
-            st.markdown(f"""
-            <div class="todo-item done">
-                <div class="todo-checkbox checked">✓</div>
-                <div class="todo-info">
-                    <div class="todo-name done">{ch['emoji']} {ch['name']}</div>
-                    <div class="todo-meta">Done by {done_by}{reset_text}</div>
+            dc1, dc2 = st.columns([5, 1])
+            with dc1:
+                st.markdown(f"""
+                <div class="todo-item done">
+                    <div class="todo-checkbox checked">✓</div>
+                    <div class="todo-info">
+                        <div class="todo-name done">{ch['emoji']} {ch['name']}</div>
+                        <div class="todo-meta">Done by {done_by}{reset_text}</div>
+                    </div>
                 </div>
-            </div>
-            """, unsafe_allow_html=True)
+                """, unsafe_allow_html=True)
+            with dc2:
+                st.markdown("<div style='margin-top: 12px;'></div>", unsafe_allow_html=True)
+                if st.button("↺", key=f"undo_rec_{ch['id']}", help="Uncheck this chore"):
+                    if ch["id"] in data.get("todo", {}):
+                        del data["todo"][ch["id"]]
+                        save_data(data)
+                        st.rerun()
 
-    # ── One-off chores ──
-    if one_off:
-        st.markdown('<div class="sec-title">📋 One-time chores</div>', unsafe_allow_html=True)
-        for ch in one_off:
-            ch_done = is_done(ch, data.get("todo", {}))
-            bloom = BLOOM_MAP.get(min(ch["points"], 5), "🌱")
-
-            if ch_done:
+# ── One-off chores ──
+if one_off:
+    st.markdown('<div class="sec-title">📋 One-time chores</div>', unsafe_allow_html=True)
+    for ch in one_off:
+        ch_done = is_done(ch, data.get("todo", {}))
+        bloom = BLOOM_MAP.get(min(ch["points"], 5), "🌱")
+        if ch_done:
+            oc_done1, oc_done2 = st.columns([5, 1])
+            with oc_done1:
                 st.markdown(f"""
                 <div class="todo-item done">
                     <div class="todo-checkbox checked">✓</div>
@@ -654,47 +664,54 @@ with tab_todo:
                     </div>
                 </div>
                 """, unsafe_allow_html=True)
-            else:
-                st.markdown(f"""
-                <div class="todo-item">
-                    <div class="todo-checkbox"></div>
-                    <div class="todo-info">
-                        <div class="todo-name">{ch['emoji']} {ch['name']}</div>
-                        <div class="todo-meta">{bloom} {ch['points']} seeds</div>
-                    </div>
+            with oc_done2:
+                st.markdown("<div style='margin-top: 12px;'></div>", unsafe_allow_html=True)
+                if st.button("↺", key=f"undo_oo_{ch['id']}", help="Uncheck this chore"):
+                    if ch["id"] in data.get("todo", {}):
+                        del data["todo"][ch["id"]]
+                        save_data(data)
+                        st.rerun()
+        else:
+            st.markdown(f"""
+            <div class="todo-item">
+                <div class="todo-checkbox"></div>
+                <div class="todo-info">
+                    <div class="todo-name">{ch['emoji']} {ch['name']}</div>
+                    <div class="todo-meta">{bloom} {ch['points']} seeds</div>
                 </div>
-                """, unsafe_allow_html=True)
-                oc1, oc2 = st.columns(2)
-                with oc1:
-                    if st.button("🌸 Pınar", key=f"oo_p_{ch['id']}", use_container_width=True):
-                        entry = {
-                            "id": str(int(datetime.now().timestamp() * 1000)),
-                            "player": "Pınar", "choreId": ch["id"], "choreName": ch["name"],
-                            "choreEmoji": ch["emoji"], "points": ch["points"],
-                            "date": datetime.now().isoformat(),
-                        }
-                        data["log"].append(entry)
-                        if "todo" not in data:
-                            data["todo"] = {}
-                        data["todo"][ch["id"]] = {"doneAt": datetime.now().timestamp() * 1000, "doneBy": "Pınar"}
-                        save_data(data)
-                        st.session_state.just_logged = {"player": "Pınar", "chore": ch["name"], "emoji": ch["emoji"], "points": ch["points"]}
-                        st.rerun()
-                with oc2:
-                    if st.button("🌿 Cris", key=f"oo_c_{ch['id']}", use_container_width=True):
-                        entry = {
-                            "id": str(int(datetime.now().timestamp() * 1000) + 1),
-                            "player": "Cris", "choreId": ch["id"], "choreName": ch["name"],
-                            "choreEmoji": ch["emoji"], "points": ch["points"],
-                            "date": datetime.now().isoformat(),
-                        }
-                        data["log"].append(entry)
-                        if "todo" not in data:
-                            data["todo"] = {}
-                        data["todo"][ch["id"]] = {"doneAt": datetime.now().timestamp() * 1000, "doneBy": "Cris"}
-                        save_data(data)
-                        st.session_state.just_logged = {"player": "Cris", "chore": ch["name"], "emoji": ch["emoji"], "points": ch["points"]}
-                        st.rerun()
+            </div>
+            """, unsafe_allow_html=True)
+            oc1, oc2 = st.columns(2)
+            with oc1:
+                if st.button("🌸 Pınar", key=f"oo_p_{ch['id']}", use_container_width=True):
+                    entry = {
+                        "id": str(int(datetime.now().timestamp() * 1000)),
+                        "player": "Pınar", "choreId": ch["id"], "choreName": ch["name"],
+                        "choreEmoji": ch["emoji"], "points": ch["points"],
+                        "date": datetime.now().isoformat(),
+                    }
+                    data["log"].append(entry)
+                    if "todo" not in data:
+                        data["todo"] = {}
+                    data["todo"][ch["id"]] = {"doneAt": datetime.now().timestamp() * 1000, "doneBy": "Pınar"}
+                    save_data(data)
+                    st.session_state.just_logged = {"player": "Pınar", "chore": ch["name"], "emoji": ch["emoji"], "points": ch["points"]}
+                    st.rerun()
+            with oc2:
+                if st.button("🌿 Cris", key=f"oo_c_{ch['id']}", use_container_width=True):
+                    entry = {
+                        "id": str(int(datetime.now().timestamp() * 1000) + 1),
+                        "player": "Cris", "choreId": ch["id"], "choreName": ch["name"],
+                        "choreEmoji": ch["emoji"], "points": ch["points"],
+                        "date": datetime.now().isoformat(),
+                    }
+                    data["log"].append(entry)
+                    if "todo" not in data:
+                        data["todo"] = {}
+                    data["todo"][ch["id"]] = {"doneAt": datetime.now().timestamp() * 1000, "doneBy": "Cris"}
+                    save_data(data)
+                    st.session_state.just_logged = {"player": "Cris", "chore": ch["name"], "emoji": ch["emoji"], "points": ch["points"]}
+                    st.rerun()
 
 
 # ======================== LOG TAB ========================
