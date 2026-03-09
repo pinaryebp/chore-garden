@@ -709,17 +709,25 @@ with tab_garden:
     elif c_tot > p_tot:
         top = "Cris"
 
+    BG_GRAD = {
+        "pinar": "linear-gradient(135deg, #D4764E, #E8A87C)",
+        "cris": "linear-gradient(135deg, #5B8C5A, #8BBF88)",
+    }
     c1, c2 = st.columns(2)
     for i, p in enumerate(PLAYERS):
         is_top = top == p["name"]
+        crown = "<div style='font-size:28px;margin-bottom:-4px;'>👑</div>" if is_top else ""
+        scale = "transform:scale(1.03);" if is_top else ""
         with [c1, c2][i]:
             st.markdown(f"""
-            <div class="garden-score {p['cls']} {'winner' if is_top else ''}">
-                {"<div class='gs-crown'>👑</div>" if is_top else ""}
-                <div class="gs-icon">{p['icon']}</div>
-                <div class="gs-name">{p['name']}</div>
-                <div class="gs-pts">{scores[p['name']]['total']}</div>
-                <div class="gs-sub">{scores[p['name']]['count']} chores planted</div>
+            <div style="border-radius:22px;padding:22px 16px;text-align:center;color:white;
+                background:{BG_GRAD[p['cls']]};box-shadow:0 8px 30px rgba(0,0,0,0.12);
+                position:relative;{scale}">
+                {crown}
+                <div style="font-size:34px;">{p['icon']}</div>
+                <div style="font-family:'Nunito',sans-serif;font-weight:800;font-size:18px;">{p['name']}</div>
+                <div style="font-family:'Playfair Display',serif;font-size:50px;line-height:1.1;text-shadow:0 2px 10px rgba(0,0,0,0.15);">{scores[p['name']]['total']}</div>
+                <div style="font-size:12px;opacity:0.85;font-weight:600;font-family:'Nunito',sans-serif;">{scores[p['name']]['count']} chores planted</div>
             </div>
             """, unsafe_allow_html=True)
 
